@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  app:
+    image: lgnewui_zeph
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lgnewui-zeph
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    volumes:
+      - /opt/LGNewUi/uploads:/var/www/html/uploads:rprivate
+      - /opt/LGNewUi/Lovefolder:/var/www/html/Lovefolder:rprivate
+      - /opt/LGNewUi/storage/updates:/var/www/html/storage/updates:rprivate
+      - /opt/LGNewUi/storage/logs:/var/www/html/storage/logs:rprivate
+      - /opt/LGNewUi/storage/cache:/var/www/html/storage/cache:rprivate
+      - /opt/LGNewUi/storage/runtime:/var/www/html/storage/runtime:rprivate
+      - /opt/LGNewUi/storage/weather_api:/var/www/html/storage/weather_api:rprivate
+      - /opt/LGNewUi/storage/jobs:/var/www/html/storage/jobs:rprivate
+      - /opt/LGNewUi/storage/packages:/var/www/html/storage/packages:rprivate
+      - /opt/LGNewUi/storage/staging:/var/www/html/storage/staging:rprivate
+      - /opt/LGNewUi/storage/backups:/var/www/html/storage/backups:rprivate
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+      - HTTP_X_FORWARDED_PROTO=https
+    networks:
+      - 1panel-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+networks:
+  1panel-network:
+    external: true
