@@ -4,8 +4,7 @@
 
 - Docker 20.10+
 - Docker Compose 1.29+
-- 已存在的外部 MySQL 数据库（如 1Panel 自带）
-- 已存在的外部 Docker 网络（如 1Panel 网络）
+- 适用于 1Panel 或飞牛等面板环境
 
 ## 文件清单
 
@@ -17,31 +16,17 @@
     └── ixed.8.0.lin
 ```
 
-## 前置准备
-
-### 1. 确认外部网络存在
-
-```bash
-docker network ls | grep 1panel-network
-```
-
-若不存在，请创建或修改 docker-compose.yml 中的网络名称。
-
-### 2. 准备 SourceGuardian Loader
-
-将 `ixed.8.0.lin` 文件放入 `loaders/` 目录。该文件用于解密运行加密保护的 PHP 代码。
-
 ## 部署步骤
 
-### 首次部署
+### 前提需要
+
+选择或创建一个项目目录（注意不要创建名为 LGNewUi 的目录），进入该目录后执行：
 
 ```bash
-# 进入项目目录
-cd /opt/your-project
-
-# 构建并启动
-docker-compose up -d --build
+curl -fsSL https://cdn.jsdelivr.net/gh/Freewind72/jsbat@main/LGNewUi-Docker/install.sh -o install.sh && chmod +x install.sh && ./install.sh
 ```
+
+安装脚本会自动下载并解压 Docker 配置文件到当前目录，然后构建并启动容器。
 
 ### 查看状态
 
