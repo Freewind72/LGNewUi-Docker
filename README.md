@@ -26,6 +26,12 @@
 curl -fsSL https://cdn.jsdelivr.net/gh/Freewind72/jsbat@main/LGNewUi-Docker/install.sh -o install.sh && chmod +x install.sh && ./install.sh
 ```
 
+如果 jsDelivr 访问不稳定，可使用 GitHub Raw 官方链接：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Freewind72/jsbat/main/LGNewUi-Docker/install.sh -o install.sh && chmod +x install.sh && ./install.sh
+```
+
 安装脚本会自动下载并解压 Docker 配置文件到当前目录，然后构建并启动容器。
 
 ### 查看状态
